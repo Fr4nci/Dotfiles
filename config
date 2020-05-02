@@ -1,0 +1,97 @@
+[module/i3]
+type = internal/i3
+index-sort = true
+enable-click = true
+
+[module/space]
+type = internal/text
+
+[module/title]
+type = internal/xwindow
+format = <label>
+label = %title%
+label-active-font = 1
+
+[module/battery]
+type = internal/battery
+battery = BAT1
+adapter = ACAD
+format-charging = <animation-charging> <label-charging>% 
+format-discharging = <animation-discharging> <label-discharging>
+label-charging = %percentage%%
+label-discharging = %percentage%%
+label-full = Full
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
+animation-discharging-3 = 
+animation-discharging-4 = 
+animation-discharging-framerate = 2000
+
+[module/net]
+type=internal/network
+interface= wlo1
+interval = 3.0
+format-connected = %{A1: nm-connection-editor:}<label-connected>%{A}
+label-connected = %essid%
+format-disconnected = %{A1: nm-connection-editor:}睊<label-disconnected>%{A}
+label-disconnected = No Internet
+
+[module/cpu]
+type = internal/cpu
+format = <label>
+interval = 0.5
+label = : %percentage%%
+
+[module/clock]
+type = internal/date
+time = %H:%M
+date = %D:%m:%y
+label =  %date%  %time%
+format = <label>
+
+[module/spotify]
+type = custom/script
+interval = 1
+format-prefix = " "
+format = <label>
+exec = python3 /home/francesco/.config/polybar/spotify_status.py -f '{artist}: {song}'
+format-underline = #1db954
+
+[module/poweroff]
+type = custom/script
+exec = echo ""
+click-left = rofi $(~/.config/polybar/rofi-power)
+
+[colors]
+; background = ${xrdb:color0:#222}
+background = #00
+foreground = ${xrdb:color7:#222}
+foreground-alt = ${xrdb:color7:#222}
+primary = ${xrdb:color1:#222}
+secondary = ${xrdb:color2:#222}
+alert = ${xrdb:color3:#222}
+
+[bar/mybar]
+font-0 = "DejaVuSansMono Nerd Font Mono:size=12;0"
+font-1 = "NotoSansMono Nerd Font Mono:size=12;0"
+background = ${colors.background}
+foreground = ${colors.foreground}
+bottom = false
+width = 100%
+height = 20px
+modules-left = i3 spotify
+modules-center = clock
+modules-right = cpu net battery poweroff
+padding-right = 0.5px
+padding-left = 0.5px
+tray-position = right
+locale = it_IT.UTF-8
+tray-scale = 1.0
+override-redirect = false
+module-margin = 1px
