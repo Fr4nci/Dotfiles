@@ -1,0 +1,1 @@
+$(acpi -i | awk '/Charging/ { print $5 }')

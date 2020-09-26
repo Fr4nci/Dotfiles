@@ -11,6 +11,7 @@ type = internal/xwindow
 format = <label>
 label = %title%
 label-active-font = 1
+label-foreground = #FFFFFF
 
 [module/battery]
 type = internal/battery
@@ -32,6 +33,11 @@ animation-discharging-2 = 
 animation-discharging-3 = 
 animation-discharging-4 = 
 animation-discharging-framerate = 2000
+label-charging-foreground = #FFFFFF
+label-discharging-foreground = #FFFFFF
+label-full-foreground = #FFFFFF
+format-charging-foreground = #FFFFFF
+format-discharging-foreground = #FFFFFF
 
 [module/net]
 type=internal/network
@@ -40,13 +46,20 @@ interval = 3.0
 format-connected = %{A1: nm-connection-editor:}<label-connected>%{A}
 label-connected = %essid%
 format-disconnected = %{A1: nm-connection-editor:}睊<label-disconnected>%{A}
+format-foreground = #FFFFFF
 label-disconnected = No Internet
+label-connected-foreground = #FFFFFF
+label-disconnected-foreground = #FFFFFF
+format-connected-foreground = #FFFFFF
+format-disconnected-foreground = #FFFFFF
 
 [module/cpu]
 type = internal/cpu
 format = <label>
 interval = 0.5
-label = : %percentage%%
+label = : %percentage:2%%
+format-padding = 1px
+format-height = 3px
 
 [module/clock]
 type = internal/date
@@ -54,6 +67,7 @@ time = %H:%M
 date = %D:%m:%y
 label =  %date%  %time%
 format = <label>
+label-foreground = #FFFFFF
 
 [module/spotify]
 type = custom/script
@@ -65,8 +79,9 @@ format-underline = #1db954
 
 [module/poweroff]
 type = custom/script
-exec = echo ""
+content = ""
 click-left = rofi $(~/.config/polybar/rofi-power)
+content-foreground = #FFFFFF
 
 [colors]
 ; background = ${xrdb:color0:#222}
@@ -87,11 +102,11 @@ width = 100%
 height = 20px
 modules-left = i3 spotify
 modules-center = clock
-modules-right = cpu net battery poweroff
 padding-right = 0.5px
+modules-right = cpu net battery poweroff
 padding-left = 0.5px
 tray-position = right
 locale = it_IT.UTF-8
 tray-scale = 1.0
-override-redirect = false
+override-redirect = true 
 module-margin = 1px

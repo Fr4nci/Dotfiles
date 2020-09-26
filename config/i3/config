@@ -32,8 +32,8 @@ exec --no-startup-id pasystray
 exec --no-startup-id blueman-applet
 exec --no-startup-id picom
 exec --no-startup-id (setxkbmap -layout it)
-exec --no-startup-id (polybar mybar)
 exec --no-startup-id nitrogen --restore
+exec_always --no-startup-id (polybar mybar)
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
@@ -45,7 +45,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -107,6 +107,8 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+# Bluetooth manager
+bindsym $mod+Shift+b exec blueman-manager
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 ""
@@ -179,6 +181,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 gaps inner 15
 gaps outer 15
+for_window [class="Blueman-manager"] floating enable
 for_window [class=".*"] border pixel 0
 for_window [class="Nm-connection-editor"] floating enable
 assign [class="Spotify"] $ws3
